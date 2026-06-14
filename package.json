@@ -4,11 +4,14 @@
   "type": "module",
   "module": "src/index.ts",
   "scripts": {
+    "build": "wxt build",
+    "dev": "wxt",
     "format": "pnpm run lint --fix . ; oxfmt . ; eslint --fix .",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "git config core.hooksPath .githooks",
+    "postinstall": "git config core.hooksPath .githooks ; wxt prepare",
     "lint": "oxlint --type-aware --type-check",
-    "precommit": "pnpm run format"
+    "precommit": "pnpm run format",
+    "zip": "wxt zip"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -23,6 +26,9 @@
     "package.json": [
       "sort-package-json"
     ]
+  },
+  "dependencies": {
+    "wxt": "catalog:"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "catalog:",

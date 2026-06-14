@@ -7,7 +7,7 @@ export default defineConfig(
     ignores: ["dist/**"],
   },
   {
-    files: ["src/**/*.ts"],
+    files: ["entrypoints/**/*.ts"],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
