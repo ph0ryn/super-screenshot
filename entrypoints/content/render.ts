@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas-pro";
 
-import type { SupportedSite } from "../sites/types";
+import type { SupportedSite } from "./sites";
 
 export async function renderTargetToCanvas(site: SupportedSite): Promise<HTMLCanvasElement> {
   const target = document.querySelector(site.query);

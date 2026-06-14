@@ -1,7 +1,7 @@
-import { findSupportedSite } from "../sites/registry";
 import { writeCanvasToClipboard } from "./clipboard";
 import { getErrorMessage } from "./errors";
 import { renderTargetToCanvas } from "./render";
+import { findSupportedSite } from "./sites";
 import { showToast } from "./toast";
 
 const CAPTURE_KEY = "p";

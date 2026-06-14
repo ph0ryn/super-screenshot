@@ -1,4 +1,12 @@
-import type { SupportedSite } from "./types";
+export type RenderMode = "element" | "video-frame";
+
+export interface SupportedSite {
+  id: string;
+  label: string;
+  match: (url: URL) => boolean;
+  query: string;
+  renderMode: RenderMode;
+}
 
 export const SUPPORTED_CONTENT_SCRIPT_MATCHES = [
   "https://www.youtube.com/*",

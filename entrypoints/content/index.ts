@@ -1,7 +1,7 @@
 import { defineContentScript } from "wxt/utils/define-content-script";
 
-import { registerCaptureHotkey } from "./lib/keyboard";
-import { SUPPORTED_CONTENT_SCRIPT_MATCHES } from "./sites/registry";
+import { registerCaptureHotkey } from "./keyboard";
+import { SUPPORTED_CONTENT_SCRIPT_MATCHES } from "./sites";
 
 export default defineContentScript({
   allFrames: false,
