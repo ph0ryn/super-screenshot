@@ -22,15 +22,15 @@ type RenderMode = "element" | "video-frame";
 
 type SupportedSite = {
   id: string;
-  label: string;
-  match: (url: URL) => boolean;
+  match: string;
   query: string;
   renderMode: RenderMode;
 };
 ```
 
-Add the domain to `SUPPORTED_CONTENT_SCRIPT_MATCHES`, then add a matching
-`SupportedSite` entry.
+Add a `SupportedSite` entry with a Tampermonkey-style `match` value such as
+`*.example.com/*`. The extension derives content script match patterns from
+these site definitions.
 
 ## Rendering Modes
 

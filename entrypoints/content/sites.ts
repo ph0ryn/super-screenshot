@@ -2,38 +2,61 @@ export type RenderMode = "element" | "video-frame";
 
 export interface SupportedSite {
   id: string;
-  label: string;
-  match: (url: URL) => boolean;
+  match: string;
   query: string;
   renderMode: RenderMode;
 }
 
-export const SUPPORTED_CONTENT_SCRIPT_MATCHES = [
-  "https://www.youtube.com/*",
-  "https://m.youtube.com/*",
-];
-
 export const SUPPORTED_SITES: readonly SupportedSite[] = [
   {
-    id: "youtube-watch-video",
-    label: "YouTube watch video",
-    match: (url) => isYoutubeHostname(url.hostname) && url.pathname === "/watch",
-    query: "video.html5-main-video",
-    renderMode: "video-frame",
-  },
-  {
-    id: "youtube-shorts-video",
-    label: "YouTube Shorts video",
-    match: (url) => isYoutubeHostname(url.hostname) && url.pathname.startsWith("/shorts/"),
-    query: "video",
-    renderMode: "video-frame",
+    id: "instagram-live",
+    match: "*.instagram.com/*/live/*",
+    query: "div[aria-label='Video player']",
+    renderMode: "element",
   },
 ];
 
+export const SUPPORTED_CONTENT_SCRIPT_MATCHES = SUPPORTED_SITES.map((site) =>
+  toContentScriptMatch(site.match),
+);
+
 export function findSupportedSite(url: URL): SupportedSite | undefined {
-  return SUPPORTED_SITES.find((site) => site.match(url));
+  return SUPPORTED_SITES.find((site) => matchesSitePattern(site.match, url));
 }
 
-function isYoutubeHostname(hostname: string): boolean {
-  return hostname === "www.youtube.com" || hostname === "m.youtube.com";
+function toContentScriptMatch(match: string): string {
+  let matchWithPath = match;
+
+  if (!matchWithPath.includes("/")) {
+    matchWithPath = `${matchWithPath}/*`;
+  }
+
+  if (matchWithPath.includes("://")) {
+    return matchWithPath;
+  }
+
+  return `*://${matchWithPath}`;
+}
+
+function matchesSitePattern(match: string, url: URL): boolean {
+  const pattern = normalizeSitePattern(match);
+  const candidate = `${url.hostname}${url.pathname}`.toLowerCase();
+  const regex = new RegExp(`^${escapeRegExp(pattern).replaceAll("\\*", ".*")}$`, "u");
+
+  return regex.test(candidate);
+}
+
+function normalizeSitePattern(match: string): string {
+  const matchWithoutScheme = match.replace(/^[a-z*]+:\/\//iu, "");
+  let matchWithPath = matchWithoutScheme;
+
+  if (!matchWithPath.includes("/")) {
+    matchWithPath = `${matchWithPath}/*`;
+  }
+
+  return matchWithPath.toLowerCase();
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }

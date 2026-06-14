@@ -30,7 +30,7 @@ async function handleKeyDown(event: KeyboardEvent): Promise<void> {
     const canvas = await renderTargetToCanvas(site);
 
     await writeCanvasToClipboard(canvas);
-    showToast(`Copied screenshot from ${site.label}.`, "success");
+    showToast("Copied screenshot.", "success");
   } catch (error) {
     const message = getErrorMessage(error);
 

@@ -6,7 +6,7 @@ export async function renderTargetToCanvas(site: SupportedSite): Promise<HTMLCan
   const target = document.querySelector(site.query);
 
   if (target === null) {
-    throw new Error(`No target found for ${site.label}: ${site.query}`);
+    throw new Error(`No target found for ${site.id}: ${site.query}`);
   }
 
   if (site.renderMode === "video-frame") {
@@ -18,11 +18,11 @@ export async function renderTargetToCanvas(site: SupportedSite): Promise<HTMLCan
 
 function renderVideoFrameToCanvas(target: Element, site: SupportedSite): HTMLCanvasElement {
   if (!(target instanceof HTMLVideoElement)) {
-    throw new Error(`Target is not a video element for ${site.label}: ${site.query}`);
+    throw new Error(`Target is not a video element for ${site.id}: ${site.query}`);
   }
 
   if (target.videoWidth === 0 || target.videoHeight === 0) {
-    throw new Error(`Video is not ready for ${site.label}.`);
+    throw new Error(`Video is not ready for ${site.id}.`);
   }
 
   const canvas = document.createElement("canvas");
@@ -46,7 +46,7 @@ async function renderElementToCanvas(
   site: SupportedSite,
 ): Promise<HTMLCanvasElement> {
   if (!(target instanceof HTMLElement)) {
-    throw new Error(`Target is not an HTML element for ${site.label}: ${site.query}`);
+    throw new Error(`Target is not an HTML element for ${site.id}: ${site.query}`);
   }
 
   return html2canvas(target, {
