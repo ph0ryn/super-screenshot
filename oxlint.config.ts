@@ -14,6 +14,7 @@ export default defineConfig({
     suspicious: "off",
   },
   env: {
+    browser: true,
     node: true,
   },
   ignorePatterns: ["dist/**", "eslint.config.mjs", "node_modules/**"],

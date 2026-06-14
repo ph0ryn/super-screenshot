@@ -1,8 +1,8 @@
 {
-  "name": "ts-base",
+  "name": "super-screenshot",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "module": "src/index.ts",
   "scripts": {
     "build": "wxt build",
     "dev": "wxt",
@@ -14,7 +14,7 @@
     "zip": "wxt zip"
   },
   "lint-staged": {
-    "src/**/*.ts": [
+    "entrypoints/**/*.ts": [
       "pnpm run precommit"
     ],
     "*.{js,mjs}": [
@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "html2canvas-pro": "catalog:",
     "wxt": "catalog:"
   },
   "devDependencies": {
