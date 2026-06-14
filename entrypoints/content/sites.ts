@@ -9,6 +9,18 @@ export interface SupportedSite {
 
 export const SUPPORTED_SITES: readonly SupportedSite[] = [
   {
+    id: "twitch-live",
+    match: "www.twitch.tv/*",
+    query: "div.persistent-player video",
+    renderMode: "video-frame",
+  },
+  {
+    id: "youtube-video",
+    match: "www.youtube.com/watch*",
+    query: "div.html5-video-container > video",
+    renderMode: "video-frame",
+  },
+  {
     id: "instagram-live",
     match: "*.instagram.com/*/live/*",
     query: "div[aria-label='Video player']",
