@@ -22,7 +22,7 @@ export const SUPPORTED_SITES: readonly SupportedSite[] = [
   },
   {
     id: "instagram-live",
-    match: "*.instagram.com/*/live/*",
+    match: "www.instagram.com/*/live/*",
     query: "div[aria-label='Video player']",
     renderMode: "element",
   },

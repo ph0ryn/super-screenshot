@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-slim
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.3
+
+      - uses: pnpm/action-setup@v6.0.8
+        with:
+          version: 11.6.0
+          run_install: false
+
+      - run: pnpm install --frozen-lockfile -P
+
+      - run: pnpm run build
+
+      - run: zip -r super-screenshot-chrome-mv3.zip ".output/chrome-mv3"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: super-screenshot-chrome-mv3.zip
