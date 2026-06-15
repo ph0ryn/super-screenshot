@@ -1,7 +1,7 @@
 # SuperScreenshot
 
-SuperScreenshot is a Chrome extension for copying screenshots from supported
-videos and livestreams to the clipboard.
+SuperScreenshot is a Chrome extension for copying screenshots from several
+videos and livestreams frames to the clipboard.
 
 ## Installation
 

@@ -3,7 +3,7 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   manifest: {
     action: {},
-    description: "Capture supported video and page elements to the clipboard.",
+    description: "Take screenshots from several videos and livestreams frame",
     name: "SuperScreenshot",
     permissions: ["clipboardWrite"],
   },
